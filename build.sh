@@ -38,7 +38,7 @@ fi;
 if test $# -eq 2 ; then 
     if test $2 == "--execute" ; then 
         echo "Execute... "
-        ./SandBox/executable/Application
+        ./SandBox/executable/SandBox
     else
         
         echo "Error : undefined parameter "
