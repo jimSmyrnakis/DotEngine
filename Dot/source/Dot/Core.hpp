@@ -1,5 +1,9 @@
 #pragma once
 
+#include <stddef.h>
+#include <stdint.h>
+
+
 // This Game Engine is targeted for linux like O.S. only 
 #define DOT_STATIC_LINK 
 #if  defined(DOT_STATIC_LINK) 
@@ -9,4 +13,7 @@
 #else 
     #error "Must define DOT_STATIC_LINK or DOT_DYNAMIC_LINK before include this file "
 #endif
+
+
+#define DOT_BIT_SET(x) (1 << (x))
 
