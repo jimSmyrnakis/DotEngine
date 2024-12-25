@@ -29,7 +29,7 @@ namespace dot{
             std::string ToString(void) const override 
             {
                 std::stringstream ss;
-                ss << "KeyPressed [ keyCode , Repeats ] : [ " << m_KeyCode << " , " << m_Repeats << " ] " << std::endl;
+                ss << "KeyPressed [ keyCode , Repeats ] : [ " << m_KeyCode << " , " << m_Repeats << " ] " ;
                 return ss.str();
             }
 
@@ -51,7 +51,7 @@ namespace dot{
             std::string ToString(void) const override 
             {
                 std::stringstream ss;
-                ss << "KeyPressed [ keyCode ] : [ " << m_KeyCode << " ] " << std::endl;
+                ss << "KeyPressed [ keyCode ] : [ " << m_KeyCode << " ] " ;
                 return ss.str();
             }
 

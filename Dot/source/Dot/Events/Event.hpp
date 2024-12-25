@@ -1,10 +1,12 @@
 #pragma once
 
-#include "Dot/Core.hpp"
+#include "../Core.hpp"
+#include "../Logger/Logger.hpp"
 
 #include <string>
 #include <functional>
 #include <sstream>
+#include <ostream>
 #include <iostream>
 
 namespace dot{
@@ -36,6 +38,7 @@ namespace dot{
         MouseScrolled       
 
     };
+    
 
     /*Each value represents a set of events , somathing like a very basic filter for our event handlerer */
     enum EventCategory{
@@ -48,9 +51,10 @@ namespace dot{
     };
 
 
-#define EVENT_CLASS_TYPE(type)          static EventType GetStaticType(void)                { return EventType::##type; }\
-                                        virtual EventType GetEventType(void) const override { return GetStaticType();   }\
-                                        virtual const char* GetName(void)    const override { return #type;             }
+#define EVENT_CLASS_TYPE(type)          static EventType GetStaticType(void)                { return EventType::type; };\
+                                        virtual EventType GetEventType(void) const override { return GetStaticType();   };\
+                                        virtual const char* GetName(void)    const override { return #type;             };
+
 #define EVENT_CLASS_CATEGORY(category)  virtual int GetCategoryFlags(void)   const override { return (category);        }
 
     //extern class EventDispatcher;
@@ -69,6 +73,9 @@ namespace dot{
             inline bool IsInCategory(EventCategory category){
                 return this->GetCategoryFlags() & category ; 
             } 
+
+            static EventType GetStaticType(void) {return EventType::None; };
+
 
         protected:
             bool m_Handled;
@@ -89,7 +96,7 @@ namespace dot{
             bool Dispatch(EventFn<T> function){
                 if (m_Event.GetStaticType() == T::GetStaticType())
                 {
-                    m_Event.m_Handled = function(*(*T)&m_Event);
+                    m_Event.m_Handled = function(*(T*)&m_Event);
                     return true;
                 }
                 return false;
@@ -100,14 +107,10 @@ namespace dot{
     };
 
 
-    inline std::ostream& operator<<(std::ostream& os , const Event& e){
-        os << e.ToString();
-        return os;
-    }
+    inline std::string format_as(const dot::Event& e){
+        return e.ToString();
+    };
 
 
+};
 
-
-
-
-}

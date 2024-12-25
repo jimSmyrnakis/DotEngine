@@ -14,7 +14,7 @@ namespace dot{
 
             std::string ToString(void) const override {
                 std::stringstream ss;
-                ss << "Window Resize Event: " << m_Width << " , " << m_Height << std::endl;
+                ss << "Window Resize Event: " << m_Width << " , " << m_Height ;
                 return ss.str();
             }
 
@@ -33,17 +33,6 @@ namespace dot{
 
             EVENT_CLASS_CATEGORY(EventCategoryApplication)
             EVENT_CLASS_TYPE(WindowClose)
-
-    };
-
-    class DOT_API AppTickEvent : public Event 
-    {
-        public:
-            AppTickEvent(void) : Event() {}
-            ~AppTickEvent(void) = default;
-
-            EVENT_CLASS_CATEGORY(EventCategoryApplication)
-            EVENT_CLASS_TYPE(AppTick)
 
     };
 

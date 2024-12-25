@@ -15,7 +15,7 @@ namespace dot{
             std::string ToString(void)const override 
             {
                 std::stringstream ss;
-                ss << "Mouse Moved Event [ x pos , y pos ] : [ " << m_MouseX << " , " << m_MouseY << " ] " << std::endl;
+                ss << "Mouse Moved Event [ x pos , y pos ] : [ " << m_MouseX << " , " << m_MouseY << " ] " ;
                 return ss.str();
             }
 
@@ -39,7 +39,7 @@ namespace dot{
             std::string ToString(void)const override 
             {
                 std::stringstream ss;
-                ss << "Mouse Scrolled Event [ x offset , y offset ] : [ " << m_XOffset << " , " << m_YOffset << " ] " << std::endl;
+                ss << "Mouse Scrolled Event [ x offset , y offset ] : [ " << m_XOffset << " , " << m_YOffset << " ] " ;
                 return ss.str();
             }
 
@@ -72,7 +72,7 @@ namespace dot{
             
             std::string ToString(void) const override {
                 std::stringstream ss;
-                ss << GetName() << " [ button , repeats ] :  [ " << m_Button << " , " << m_Repeats << " ] " << std::endl;
+                ss << GetName() << " [ button , repeats ] :  [ " << (int)m_Button << " , " << m_Repeats << " ] " ;
                 return ss.str(); 
             }
 
@@ -91,12 +91,12 @@ namespace dot{
 
             std::string ToString(void) const override {
                 std::stringstream ss;
-                ss << GetName() << " [ button ] : [ " << m_Button << " ] " << std::endl;
+                ss << GetName() << " [ button ] : [ " << (int)m_Button << " ] " ;
                 return ss.str(); 
             }
 
             EVENT_CLASS_TYPE(MouseButtonReleased)
-    }
+    };
 
 
 
