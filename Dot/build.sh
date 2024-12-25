@@ -11,7 +11,7 @@ rm -rf ./library/libDot.a
 # Record start time
 start_time=$(get_time_ms)
 
-#cmake -S ./Vendor/glfw/ -B ./Vendor/glfw/library
+
 
 g++ -c ./source/Dot/Application.cpp -o ./object/Dot/Application.o -I./Vendor/spdlog/include -I./source 
 g++ -c ./source/Dot/Logger/Logger.cpp -o ./object/Dot/Logger/Logger.o -I./Vendor/spdlog/include -I./source 
