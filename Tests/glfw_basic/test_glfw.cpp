@@ -1,6 +1,9 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
-
+typedef void(lol)(int&);
+void aaa(int& x){
+    x++;
+}
 int main() {
     if (!glfwInit()) {
         std::cerr << "Failed to initialize GLFW" << std::endl;
@@ -25,5 +28,10 @@ int main() {
 
     glfwDestroyWindow(window);
     glfwTerminate();
+    int x= 90;
+    lol t;
+    lol& y = aaa;
+    t(x);
+    std::cout << x << std::endl;
     return 0;
 }

@@ -19,6 +19,8 @@ namespace dot{
 
             void Run(void);
 
+            void OnEvent(Event& e);
+
         private:
             std::unique_ptr<dot::Window> m_Window;
             bool                         m_Running;

@@ -21,6 +21,8 @@ namespace dot{
         
     };
 
+    typedef void (EventCallBackFn)(dot::Event&);
+
     // A abstranction of a window for varius implementations
     class DOT_API Window
     {
@@ -28,7 +30,7 @@ namespace dot{
             Window(void) = default;
             virtual ~Window(void) = default;
 
-            using EventCallBackFn = std::function<void(Event&)>;
+            //using EventCallBackFn = std::function<void(Event&)>;
 
             virtual void OnUpdate(void) = 0;
 
