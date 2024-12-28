@@ -2,7 +2,7 @@
 #include "../../../Events/ApplicationEvent.hpp"
 #include "../../../Events/KeyEvent.hpp"
 #include "../../../Events/MouseEvent.hpp"
-
+#include <glad/glad.h>
 
 namespace dot {
 
@@ -26,7 +26,7 @@ namespace dot {
 
 
     void UbunduWindow::SetEventCallBack(const EventCallBackFn& callback) {
-        m_Data.EventCallBack = &callback;
+        m_Data.EventCallBack = callback;
     }
 
     void UbunduWindow::SetVSync(bool enabled) {
@@ -40,7 +40,7 @@ namespace dot {
         m_Data.Title  = props.Title;
         m_Data.Height = props.Height;
         m_Data.Width  = props.Width;
-        m_Data.EventCallBack  = nullptr;
+        //m_Data.EventCallBack  = nullptr;
 
         DOT_ENGINE_INFO("Creating Ubundu(glfw) Window {0} ({1}, {2})" , m_Data.Title , m_Data.Width , m_Data.Height);
 
@@ -53,6 +53,11 @@ namespace dot {
 
         m_Window = glfwCreateWindow(m_Data.Width , m_Data.Height , m_Data.Title.c_str() , nullptr , nullptr);
         glfwMakeContextCurrent(m_Window);
+
+        //try initiallize glad 
+        int status = gladLoadGLLoader((GLADloadproc) glfwGetProcAddress);
+        DOT_ENGINE_ASSERT(status , "Failed to initiallize glad !!!");
+
         glfwSetWindowUserPointer(m_Window , &m_Data);
         SetVSync(true);
 
@@ -71,77 +76,77 @@ namespace dot {
     }
 
     // create glfw specific callbacks functions and pass the events
-    void for_glfw_resize_event(GLFWwindow* window , int width , int height ){
+    void UbunduWindow::for_glfw_resize_event(GLFWwindow* window , int width , int height ){
         //get User Specific data pointers (we send that pointer , we know wtf is that)
-        dot::WindowData& ourData = *(dot::WindowData*)glfwGetWindowUserPointer(window);
+        dot::UbunduWindow::WindowData& ourData = *(dot::UbunduWindow::WindowData*)glfwGetWindowUserPointer(window);
         ourData.Width = width;
         ourData.Height = height;
         dot::WindowResizeEvent event(width , height);
-        (*ourData.EventCallBack)(event);
+        ourData.EventCallBack(event);
     }
 
-    void for_glfw_close_event(GLFWwindow* window){
-        dot::WindowData* ourData = (dot::WindowData*)glfwGetWindowUserPointer(window);
+    void UbunduWindow::for_glfw_close_event(GLFWwindow* window){
+        dot::UbunduWindow::WindowData* ourData = (dot::UbunduWindow::WindowData*)glfwGetWindowUserPointer(window);
         dot::WindowCloseEvent event;
-        (*ourData->EventCallBack)(event);
+        ourData->EventCallBack(event);
         //glfwDestroyWindow(window);
     }
 
-    void for_glfw_key_events (GLFWwindow* window , int key , int scancode , int action , int mode){
-        dot::WindowData* ourData = (dot::WindowData*)glfwGetWindowUserPointer(window);
+    void UbunduWindow::for_glfw_key_events (GLFWwindow* window , int key , int scancode , int action , int mode){
+        dot::UbunduWindow::WindowData* ourData = (dot::UbunduWindow::WindowData*)glfwGetWindowUserPointer(window);
         
         dot::Event* key_events = nullptr;
         switch(action){
             case GLFW_PRESS: {
                 dot::KeyPressedEvent event(key , 0);
-                (*ourData->EventCallBack)(event);
+                ourData->EventCallBack(event);
                 break;
             }
             case GLFW_RELEASE: {
                 dot::KeyReleasedEvent event(key);
-                (*ourData->EventCallBack)(event);
+                ourData->EventCallBack(event);
                 break;
             }
             case GLFW_REPEAT: {
                 dot::KeyPressedEvent event(key , 1);
-                (*ourData->EventCallBack)(event);
+                ourData->EventCallBack(event);
                 break;
             }
         };
 
     }
 
-    void for_glfw_mouse_button_events (GLFWwindow* window , int key , int action , int mode){
-        dot::WindowData* ourData = (dot::WindowData*)glfwGetWindowUserPointer(window);
+    void UbunduWindow::for_glfw_mouse_button_events (GLFWwindow* window , int key , int action , int mode){
+        dot::UbunduWindow::WindowData* ourData = (dot::UbunduWindow::WindowData*)glfwGetWindowUserPointer(window);
         
         switch(action){
             case GLFW_PRESS: {
                 dot::MouseButtonPressedEvent event(key , 0);
-                (*ourData->EventCallBack)(event);
+                ourData->EventCallBack(event);
                 break;
             }
             case GLFW_RELEASE: {
                 dot::MouseButtonReleasedEvent event(key);
-                (*ourData->EventCallBack)(event);
+                ourData->EventCallBack(event);
                 break;
             }
         };
 
     }
 
-    void for_glfw_mouse_scroll_event  (GLFWwindow* window , double xOffset , double yOffset){
-        dot::WindowData* ourData = (dot::WindowData*)glfwGetWindowUserPointer(window);
+    void UbunduWindow::for_glfw_mouse_scroll_event  (GLFWwindow* window , double xOffset , double yOffset){
+        dot::UbunduWindow::WindowData* ourData = (dot::UbunduWindow::WindowData*)glfwGetWindowUserPointer(window);
         dot::MouseScrolledEvent event((float)xOffset , (float)yOffset);
-        (*ourData->EventCallBack)(event);
+        ourData->EventCallBack(event);
     }
 
-    void for_glfw_mouse_moved_event (GLFWwindow* window , double xPos , double yPos){
-        dot::WindowData* ourData = (dot::WindowData*)glfwGetWindowUserPointer(window);
+    void UbunduWindow::for_glfw_mouse_moved_event (GLFWwindow* window , double xPos , double yPos){
+        dot::UbunduWindow::WindowData* ourData = (dot::UbunduWindow::WindowData*)glfwGetWindowUserPointer(window);
         dot::MouseMovedEvent event((float)xPos , (float)yPos);
-        (*ourData->EventCallBack)(event);
+        ourData->EventCallBack(event);
     }
 
-    void for_glfw_error_event (int error , const char* description){
+    void UbunduWindow::for_glfw_error_event (int error , const char* description){
         DOT_ENGINE_ERROR(" GLFW Error Code => {0} and GLFW description => {1}" , error , description);
     }
 

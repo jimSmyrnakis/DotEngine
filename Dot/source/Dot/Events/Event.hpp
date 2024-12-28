@@ -74,7 +74,9 @@ namespace dot{
                 return this->GetCategoryFlags() & category ; 
             } 
 
-            static EventType GetStaticType(void) {return EventType::None; };
+            bool IsHandled(void) const { return m_Handled; }
+
+            
 
 
         protected:
@@ -94,7 +96,7 @@ namespace dot{
 
             template<typename T>
             bool Dispatch(EventFn<T> function){
-                if (m_Event.GetStaticType() == T::GetStaticType())
+                if (m_Event.GetEventType() == T::GetStaticType())
                 {
                     m_Event.m_Handled = function(*(T*)&m_Event);
                     return true;

@@ -13,12 +13,14 @@ start_time=$(get_time_ms)
 
 
 
-g++ -c ./source/Dot/Application.cpp -o ./object/Dot/Application.o -I./Vendor/spdlog/include -I./source 
+g++ -c ./source/Dot/Application.cpp -o ./object/Dot/Application.o -I./Vendor/spdlog/include -I./source -I../Vendor/glad/include
 g++ -c ./source/Dot/Logger/Logger.cpp -o ./object/Dot/Logger/Logger.o -I./Vendor/spdlog/include -I./source 
-g++ -c ./source/Dot/Window/Platforms/Ubundu/UbunduWindow.cpp -o ./object/Dot/Window/Window.o -I./Vendor/spdlog/include -I./source -I../Vendor/glfw/include
+g++ -c ./source/Dot/Window/Platforms/Ubundu/UbunduWindow.cpp -o ./object/Dot/Window/Window.o -I./Vendor/spdlog/include -I./source -I../Vendor/glfw/include -I../Vendor/glad/include
+g++ -c ./source/Dot/Layer/Layer.cpp -o ./object/Dot/Layer/Layer.o -I./Vendor/spdlog/include -I./source 
+g++ -c ./source/Dot/Layer/LayerStack.cpp -o ./object/Dot/Layer/LayerStack.o -I./Vendor/spdlog/include -I./source 
 
-ar rcs ./library/libDot.a  ./object/Dot/Application.o ./object/Dot/Logger/Logger.o ./object/Dot/Window/Window.o # 
-#ar rcs ./library/libDot.a ./object/Dot/Application.o ./object/Dot/Logger/Logger.o ./object/Dot/Window/Window.o ./Vendor/glfw/build/src/*.o
+ar rcs ./library/libDot.a  ./object/Dot/Application.o ./object/Dot/Logger/Logger.o ./object/Dot/Window/Window.o ./object/Dot/Layer/Layer.o ./object/Dot/Layer/LayerStack.o  ./../Vendor/glad/obj/glad.o
+
 
 # Record end time
 end_time=$(get_time_ms)
@@ -27,4 +29,4 @@ time_diff=$((end_time - start_time))
 # Output the result
 echo "Building Dot Core library time: ${time_diff} ms"
 
-rm -rf ./object/Dot/Application.o ./object/Dot/Logger/Logger.o ./object/Dot/Window/Window.o
+rm -rf ./object/Dot/Application.o ./object/Dot/Logger/Logger.o ./object/Dot/Window/Window.o ./object/Dot/Layer/Layer.o ./object/Dot/Layer/LayerStack.o
