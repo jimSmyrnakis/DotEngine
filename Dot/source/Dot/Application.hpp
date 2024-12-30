@@ -26,10 +26,15 @@ namespace dot{
             void PushLayer(Layer* layer);
             void PushOverlay(Layer* layer);
 
+            inline Window& GetWindow(void) const {return *m_Window;}
+
+            static Application& Get(void); 
+
         private:
             bool OnWindowClose(WindowCloseEvent& e);
 
         private:
+            static dot::Application*     s_AppInstance;
             std::unique_ptr<dot::Window> m_Window;
             bool                         m_Running;
             LayerStack                   m_LayersStack;

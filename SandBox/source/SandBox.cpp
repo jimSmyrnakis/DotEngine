@@ -2,6 +2,7 @@
 
 SandBox::SandBox(void): dot::Application::Application() {
     this->PushLayer(new ExambleLayer());
+    this->PushOverlay(new dot::ImguiLayer());
 }
 
 SandBox::~SandBox(void){

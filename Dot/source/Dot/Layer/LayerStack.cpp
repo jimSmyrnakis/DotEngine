@@ -12,10 +12,12 @@ dot::LayerStack::~LayerStack(void){
 
 void dot::LayerStack::PushLayer(dot::Layer* layer){
     m_Last = m_Layers.emplace(m_Last , layer);
+    layer->OnAttach();
 }
 
 void dot::LayerStack::PushOverlay(dot::Layer* overlay){
     m_Layers.emplace_back(overlay);
+    overlay->OnAttach();
 }
 
 void dot::LayerStack::PopLayer(dot::Layer* layer){
@@ -23,15 +25,18 @@ void dot::LayerStack::PopLayer(dot::Layer* layer){
     if (it == m_Layers.end())
         return;
     
+    (*it)->OnDetach();
     m_Layers.erase(it);
     m_Last--;
+
 }
 
 void dot::LayerStack::PopOverlay(dot::Layer* overlay){
     std::vector<Layer*>::iterator it = std::find(m_Layers.begin() , m_Layers.end() , overlay);
     if (it == m_Layers.end())
         return;
-    
+        
+    (*it)->OnDetach();
     m_Layers.erase(it);
 }
 

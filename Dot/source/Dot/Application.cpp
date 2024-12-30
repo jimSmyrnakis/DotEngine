@@ -3,7 +3,15 @@
 
 #define BIND_EVENT_FUN(x) std::bind(&Application::x , this , std::placeholders::_1)
 
+dot::Application* dot::Application::s_AppInstance = nullptr;
+
+dot::Application& dot::Application::Get(void){
+    return *s_AppInstance;
+}
+
 dot::Application::Application(void){
+    DOT_ENGINE_ASSERT(s_AppInstance == nullptr , "Instance of the Application Already exist!");
+    s_AppInstance = this;
     m_Window = std::unique_ptr<Window>(Window::Create());
     m_Running = true;
     m_Window->SetEventCallBack(BIND_EVENT_FUN(OnEvent));

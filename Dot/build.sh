@@ -18,8 +18,11 @@ g++ -c ./source/Dot/Logger/Logger.cpp -o ./object/Dot/Logger/Logger.o -I./Vendor
 g++ -c ./source/Dot/Window/Platforms/Ubundu/UbunduWindow.cpp -o ./object/Dot/Window/Window.o -I./Vendor/spdlog/include -I./source -I../Vendor/glfw/include -I../Vendor/glad/include
 g++ -c ./source/Dot/Layer/Layer.cpp -o ./object/Dot/Layer/Layer.o -I./Vendor/spdlog/include -I./source 
 g++ -c ./source/Dot/Layer/LayerStack.cpp -o ./object/Dot/Layer/LayerStack.o -I./Vendor/spdlog/include -I./source 
+g++ -c ./source/Dot/Layers/ImguiLayer/ImguiLayer.cpp -o ./object/Dot/Layers/ImguiLayer/ImguiLayer.o -I./Vendor/spdlog/include -I./source -I./../Vendor/imgui/include -I../Vendor/glfw/include
+#temporary imgui usage
+#g++ -c ./source/Dot/Layers/ImguiLayer/temporary/imgui_impl_opegl3.cpp -o ./object/Dot/Layers/ImguiLayer/temporary/imgui_impl_opegl3.o -I./Vendor/spdlog/include -I./source -I./../Vendor/imgui/include -I../Vendor/glfw/include
 
-ar rcs ./library/libDot.a  ./object/Dot/Application.o ./object/Dot/Logger/Logger.o ./object/Dot/Window/Window.o ./object/Dot/Layer/Layer.o ./object/Dot/Layer/LayerStack.o  ./../Vendor/glad/obj/glad.o
+ar rcs ./library/libDot.a  ./object/Dot/Application.o ./object/Dot/Logger/Logger.o ./object/Dot/Window/Window.o  ./object/Dot/Layer/Layer.o ./object/Dot/Layer/LayerStack.o  ./../Vendor/glad/obj/glad.o ./object/Dot/Layers/ImguiLayer/ImguiLayer.o
 
 
 # Record end time

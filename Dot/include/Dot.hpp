@@ -9,6 +9,7 @@
 #include "../source/Dot/Window/Window.hpp"
 #include "../source/Dot/Layer/LayerStack.hpp"
 #include "../source/Dot/Layer/Layer.hpp"
+#include "../source/Dot/Layers/ImguiLayer/ImguiLayer.hpp"
 
 
 

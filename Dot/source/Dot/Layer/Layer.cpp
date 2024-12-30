@@ -2,7 +2,7 @@
 
 dot::Layer::Layer(const std::string& name ) : m_Name(name) {}
 dot::Layer::~Layer(void){
-
+    OnDetach();
 }
 
 void dot::Layer::OnAttach(void) {}

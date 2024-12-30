@@ -18,5 +18,11 @@ cd ../../../
 echo "Compile and build glad object file ..."
 g++ -c ./Vendor/glad/src/glad.c -o ./Vendor/glad/obj/glad.o -I./Vendor/glad/include
 
+#compile linked and create static library for imgui
+echo "compile linked and create static library for imgui ..."
+cd ./Vendor/imgui
+./build.sh
+cd ../..
+
 echo "SUCCESSFULL !!!"
 
