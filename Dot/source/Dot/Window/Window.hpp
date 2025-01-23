@@ -1,6 +1,6 @@
-#pragma once 
+
+#pragma once
 #include "../Core.hpp"
-#include <functional>
 #include "../Events/Event.hpp"
 
 namespace dot{
@@ -21,7 +21,6 @@ namespace dot{
         
     };
     
-    //typedef void (EventCallBackFn)(dot::Event&);
 
     // A abstranction of a window for varius implementations
     class DOT_API Window
@@ -30,8 +29,7 @@ namespace dot{
             Window(void) = default;
             virtual ~Window(void) = default;
             using EventCallBackFn = std::function<void (Event&)>;
-            //using EventCallBackFn = std::function<void(Event&)>;
-
+            
             virtual void OnUpdate(void) = 0;
 
             virtual uint32_t GetWidth(void)  const = 0;
@@ -41,8 +39,9 @@ namespace dot{
             virtual void SetVSync(bool enabled) = 0;
             virtual bool IsVSync() const = 0;
 
+            virtual void* GetNativeWindow(void) const = 0;
+
             static Window* Create(const WindowProps& props = WindowProps()); 
             /*This implemented in Window Specific file */
-
     };
 }

@@ -10,9 +10,7 @@ class ExambleLayer : public dot::Layer {
         ~ExambleLayer(void) = default;
 
         void OnUpdate(void) override {
-            //DOT_INFO("Examble Layer ==> Update");
-            if (m_IsResized)
-                DOT_INFO("Stop Resizing the window :( !!!");
+            
         }
 
         void OnEvent(dot::Event& e) override {

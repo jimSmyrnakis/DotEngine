@@ -1,7 +1,6 @@
+
 #pragma once 
-
 #include "Layer.hpp"
-
 #include <vector>
 
 namespace dot {
@@ -19,7 +18,7 @@ namespace dot {
             std::vector<Layer*>::iterator End(void);
 
         private:
-            std::vector<Layer*>           m_Layers;
-            std::vector<Layer*>::iterator m_Last;
+            std::vector<Layer*>     m_Layers;
+            uint32_t                m_LastIndex;
     };
 }

@@ -1,6 +1,7 @@
+
+
 #pragma once
 #include "Core.hpp"
-
 #include "Events/Event.hpp"
 #include "Events/KeyEvent.hpp"
 #include "Events/MouseEvent.hpp"
@@ -9,7 +10,10 @@
 #include "Window/Window.hpp"
 #include "Layer/Layer.hpp"
 #include "Layer/LayerStack.hpp"
-#include <memory>
+#include "Layers/ImguiLayer/ImguiLayer.hpp"
+#include "Renderer/RenderApi/OpenGL/OpenGLShader.hpp"
+#include "Renderer/RenderApi/Buffer.hpp"
+#include "Renderer/Camera.hpp"
 
 
 namespace dot{
@@ -34,9 +38,16 @@ namespace dot{
             bool OnWindowClose(WindowCloseEvent& e);
 
         private:
-            static dot::Application*     s_AppInstance;
-            std::unique_ptr<dot::Window> m_Window;
-            bool                         m_Running;
-            LayerStack                   m_LayersStack;
+            static dot::Application*        s_AppInstance;
+            std::unique_ptr<dot::Window>    m_Window;
+            dot::ImguiLayer*                m_ImGuiLayer;
+            bool                            m_Running;
+            LayerStack                      m_LayersStack;
+            PerspectiveCamera*             m_Camera;
+
+            OpenGLShader*                   m_CubeShader;
+            VertexBuffer*                   m_VOCube;
+            VertexArray*                    m_VAOCube;
+            IndexBuffer*                    m_IOCube;
     };
 }

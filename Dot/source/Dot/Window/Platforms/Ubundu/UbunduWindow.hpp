@@ -1,8 +1,8 @@
+
 #pragma once
+
 #include "../../Window.hpp"
-#define GLFW_INCLUDE_NONE
-#include <GLFW/glfw3.h>
-#include <memory>
+#include "../../../Renderer/RenderApi/OpenGL/OpenGLContext.hpp"
 
 namespace dot{
 
@@ -21,12 +21,13 @@ namespace dot{
             void SetEventCallBack(const EventCallBackFn& callback) override;
             void SetVSync(bool enabled) override;
             bool IsVSync() const override;
+            void* GetNativeWindow(void) const override;
 
         private:
             virtual void Init(const WindowProps& props);
             virtual void Shutdown(void);
         private:
-            GLFWwindow* m_Window;
+            void* m_Window;
 
             struct WindowData
             {
@@ -37,16 +38,19 @@ namespace dot{
                 EventCallBackFn EventCallBack;
             };
 
-            WindowData m_Data;
+            WindowData     m_Data;
+            OpenGLContext* m_Context;
+
         private:
             static bool s_GLFWInitiallized;
             // create glfw specific callbacks functions and pass the events
-            static void for_glfw_resize_event        (GLFWwindow* window , int width , int height );
-            static void for_glfw_close_event         (GLFWwindow* window);
-            static void for_glfw_key_events          (GLFWwindow* window , int key , int scancode , int action , int mode);
-            static void for_glfw_mouse_button_events (GLFWwindow* window , int key , int action , int mode);
-            static void for_glfw_mouse_scroll_event  (GLFWwindow* window , double xOffset , double yOffset);
-            static void for_glfw_mouse_moved_event   (GLFWwindow* window , double xPos , double yPos);
+            static void for_glfw_resize_event        (void* window , int width , int height );
+            static void for_glfw_close_event         (void* window);
+            static void for_glfw_key_events          (void* window , int key , int scancode , int action , int mode);
+            static void for_glfw_key_typed_event     (void* window , unsigned int character);
+            static void for_glfw_mouse_button_events (void* window , int key , int action , int mode);
+            static void for_glfw_mouse_scroll_event  (void* window , double xOffset , double yOffset);
+            static void for_glfw_mouse_moved_event   (void* window , double xPos , double yPos);
             static void for_glfw_error_event (int error , const char* description);
     };
 

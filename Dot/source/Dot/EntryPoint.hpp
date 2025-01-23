@@ -1,3 +1,4 @@
+
 #pragma once
 
 #include "Application.hpp"
@@ -10,10 +11,6 @@ namespace dot{
 
 int main(int argc , char** argv){
     dot::Logger::Init();
-
-    DOT_ENGINE_INFO(" Dot Game Engine => Hello World !!!");
-
-    DOT_INFO("Client logger  => Hello World !!!");
 
     dot::Application* application = dot::CreateApplication();
 

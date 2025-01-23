@@ -1,13 +1,8 @@
-#pragma once
 
+#pragma once
 #include "../Core.hpp"
 #include "../Logger/Logger.hpp"
 
-#include <string>
-#include <functional>
-#include <sstream>
-#include <ostream>
-#include <iostream>
 
 namespace dot{
 
@@ -29,6 +24,7 @@ namespace dot{
 
         /*Keyboard input Events*/
         KeyPressed          ,
+        KeyTyped            ,
         KeyReleased         ,
 
         /*Mouse Input Events*/
@@ -68,13 +64,13 @@ namespace dot{
             virtual EventType   GetEventType(void)      const = 0;
             virtual const char* GetName(void)           const = 0;
             virtual int         GetCategoryFlags(void)  const = 0;
-            virtual std::string ToString(void)          const { return this->GetName() ; }
+            virtual inline std::string ToString(void)          const { return this->GetName() ; }
             
             inline bool IsInCategory(EventCategory category){
                 return this->GetCategoryFlags() & category ; 
             } 
 
-            bool IsHandled(void) const { return m_Handled; }
+            inline bool IsHandled(void) const { return m_Handled; }
 
             
 

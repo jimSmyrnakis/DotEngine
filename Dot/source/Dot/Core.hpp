@@ -1,7 +1,5 @@
-#pragma once
 
-#include <stddef.h>
-#include <stdint.h>
+#pragma once
 #include "Logger/Logger.hpp"
 
 #define DEBUG_MODE
@@ -29,5 +27,9 @@
 #define DOT_ASSERT(x , ...) x
 
 #endif
+
+#define DOT_ENGINE_BIND_FN(T , x) std::bind(&T::x , this , std::placeholders::_1)
+
+#define dotSize uint32_t
 
  

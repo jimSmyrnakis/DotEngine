@@ -1,3 +1,4 @@
+
 #pragma once
 #include "Event.hpp"
 
@@ -8,20 +9,20 @@ namespace dot{
     class DOT_API KeyEvent : public Event
     {
         public:
-            inline uint16_t GetKeyCode(void) const { return m_KeyCode; }
+            inline uint32_t GetKeyCode(void) const { return m_KeyCode; }
 
             EVENT_CLASS_CATEGORY(EventCategoryKeyboard | EventCategoryInput);
 
         protected:
             KeyEvent(uint16_t keyCode) :Event() , m_KeyCode(keyCode) {}
             virtual ~KeyEvent(void) = default;
-            uint16_t m_KeyCode;
+            uint32_t m_KeyCode;
     };
 
     class DOT_API KeyPressedEvent : public KeyEvent 
     {
         public:
-            KeyPressedEvent(uint16_t keyCode , uint32_t repeatCount) : KeyEvent(keyCode) , m_Repeats(repeatCount) {}
+            KeyPressedEvent(uint32_t keyCode , uint32_t repeatCount) : KeyEvent(keyCode) , m_Repeats(repeatCount) {}
             ~KeyPressedEvent(void) = default;
 
             inline uint32_t GetRepeatCount(void) const { return m_Repeats; }
@@ -51,11 +52,35 @@ namespace dot{
             std::string ToString(void) const override 
             {
                 std::stringstream ss;
-                ss << "KeyPressed [ keyCode ] : [ " << m_KeyCode << " ] " ;
+                ss << "KeyReleased [ keyCode ] : [ " << m_KeyCode << " ] " ;
                 return ss.str();
             }
 
             EVENT_CLASS_TYPE(KeyReleased)
+
+    };
+
+    class DOT_API KeyTypedEvent : public KeyEvent 
+    {
+        public:
+            KeyTypedEvent(uint32_t character ) : KeyEvent(character) {}
+            ~KeyTypedEvent(void) = default;
+
+            inline uint32_t GetChar(void) const {return m_KeyCode; }
+
+            std::string ToString(void) const override 
+            {
+                std::stringstream ss;
+                ss << "KeyTyped [ keyCode , Repeats ] : [ " << m_KeyCode <<" ] " ;
+                return ss.str();
+            }
+
+            EVENT_CLASS_TYPE(KeyTyped)
+
+
+
+        private:
+            
 
     };
 

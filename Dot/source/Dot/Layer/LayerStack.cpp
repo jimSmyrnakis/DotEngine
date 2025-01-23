@@ -1,8 +1,9 @@
+
 #include "LayerStack.hpp"
 
 
 dot::LayerStack::LayerStack(void){
-    m_Last = m_Layers.begin();
+    m_LastIndex = 0;
 }
 
 dot::LayerStack::~LayerStack(void){
@@ -11,7 +12,8 @@ dot::LayerStack::~LayerStack(void){
 }
 
 void dot::LayerStack::PushLayer(dot::Layer* layer){
-    m_Last = m_Layers.emplace(m_Last , layer);
+    m_Layers.emplace(m_Layers.begin() + m_LastIndex , layer);
+    m_LastIndex++;
     layer->OnAttach();
 }
 
@@ -25,9 +27,9 @@ void dot::LayerStack::PopLayer(dot::Layer* layer){
     if (it == m_Layers.end())
         return;
     
-    (*it)->OnDetach();
+    layer->OnDetach();
     m_Layers.erase(it);
-    m_Last--;
+    m_LastIndex--;
 
 }
 
@@ -35,7 +37,7 @@ void dot::LayerStack::PopOverlay(dot::Layer* overlay){
     std::vector<Layer*>::iterator it = std::find(m_Layers.begin() , m_Layers.end() , overlay);
     if (it == m_Layers.end())
         return;
-        
+
     (*it)->OnDetach();
     m_Layers.erase(it);
 }
