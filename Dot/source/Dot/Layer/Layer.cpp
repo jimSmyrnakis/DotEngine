@@ -8,7 +8,7 @@ dot::Layer::~Layer(void){
 
 void dot::Layer::OnAttach(void) {}
 void dot::Layer::OnDetach(void) {}
-void dot::Layer::OnUpdate(void) {}
+void dot::Layer::OnUpdate(TimeStep time) {}
 void dot::Layer::OnEvent(Event& event) {}
 void dot::Layer::OnImGuiRender(void) {}
 

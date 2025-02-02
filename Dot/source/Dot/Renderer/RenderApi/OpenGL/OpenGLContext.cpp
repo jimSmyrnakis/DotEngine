@@ -8,7 +8,7 @@
 void InitForGLFW(GLFWwindow* Glfw_WindowPointer);
 void SwapBufferForGLFW(GLFWwindow* Glfw_WindowPointer);
 
-dot::OpenGLContext::OpenGLContext(void* nativeWindowPointer) : GraphicsContext(dot::WindowApiImpl::GLFW_UBUNDU) {
+dot::OpenGLContext::OpenGLContext(void* nativeWindowPointer) : Context(dot::WindowApiImpl::GLFW_UBUNDU) {
     DOT_ENGINE_ASSERT(nativeWindowPointer != nullptr , "No Native Window Pointer is Given for implemating window contex for the render api");
     m_NativeWindowPointer = nativeWindowPointer;
 }

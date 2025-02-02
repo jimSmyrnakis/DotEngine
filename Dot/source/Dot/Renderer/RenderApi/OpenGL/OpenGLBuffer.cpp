@@ -41,15 +41,15 @@ void dot::OpenGLVertexBuffer::Unbind(void) const {
     glBindBuffer(GL_ARRAY_BUFFER , 0);
 }
 
-dot::BufferLayout& dot::OpenGLVertexBuffer::GetLayout(void) {
+dot::VertexLayout& dot::OpenGLVertexBuffer::GetLayout(void) {
     return m_Layout;
 }
 
-const dot::BufferLayout& dot::OpenGLVertexBuffer::GetLayout(void) const {
+const dot::VertexLayout& dot::OpenGLVertexBuffer::GetLayout(void) const {
     return m_Layout;
 }
 
-void dot::OpenGLVertexBuffer::SetLayout(const dot::BufferLayout layout) {
+void dot::OpenGLVertexBuffer::SetLayout(const dot::VertexLayout layout) {
     m_Layout = layout;
 }
 //================================================================================================
@@ -124,7 +124,7 @@ void dot::OpenGLVertexArray::AddVertexBuffer(const dot::VertexBuffer& vo) {
 
     uint32_t layout_index = 0;
 
-    BufferElement element = vo.GetLayout().GetElements().at(layout_index);
+    VertexElement element = vo.GetLayout().GetElements().at(layout_index);
 
     for (layout_index = 0 ; layout_index < vo.GetLayout().GetElements().size(); layout_index++){
 

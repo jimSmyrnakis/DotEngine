@@ -1,10 +1,10 @@
 
 #pragma once
-#include "../GraphicsContext.hpp"
+#include "../Context.hpp"
 
 namespace dot{
 
-    class OpenGLContext : public GraphicsContext {
+    class OpenGLContext : public Context {
         public:
             OpenGLContext(void* nativeWindowPointer);
             ~OpenGLContext(void);

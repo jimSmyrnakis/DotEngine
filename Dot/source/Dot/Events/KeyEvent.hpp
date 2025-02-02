@@ -1,6 +1,10 @@
 
 #pragma once
 #include "Event.hpp"
+#include <sstream>
+#include <stdint.h>
+#include <stddef.h>
+
 
 namespace dot{
 

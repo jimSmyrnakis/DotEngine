@@ -2,7 +2,7 @@
 #pragma once
 #include "../Core.hpp"
 #include "../Logger/Logger.hpp"
-
+#include <string>
 
 namespace dot{
 

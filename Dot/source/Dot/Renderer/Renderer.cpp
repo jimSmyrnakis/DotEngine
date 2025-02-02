@@ -16,11 +16,15 @@ void dot::Renderer::BeginScene(const dot::Camera* camera) {
         case dot::Camera::CameraType::PERSPECTIVE  : 
             s_Camera = new dot::PerspectiveCamera(*(dot::PerspectiveCamera*)camera);   break;
     }
-
+    // this one is very badly perfomance writen , but game engine is still in construction so
+    // no big deal for the moment :) .
     
-} 
-void dot::Renderer::EndScene(void) {}   // TODO
-void dot::Renderer::Submit(VertexArray& va){
-    RenderCommand::DrawIndexed(va);
 }
+
+void dot::Renderer::EndScene(void) {}   // TODO
+
+void dot::Renderer::Submit(VertexArray& va , MeshSettings settings){
+    RenderCommand::DrawIndexed(va , settings);
+}
+
 

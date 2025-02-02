@@ -1,5 +1,3 @@
-
-
 #pragma once
 #include "Core.hpp"
 #include "Events/Event.hpp"
@@ -15,6 +13,7 @@
 #include "Renderer/RenderApi/Buffer.hpp"
 #include "Renderer/Camera.hpp"
 
+#include <memory>
 
 namespace dot{
     class DOT_API Application{
@@ -43,11 +42,7 @@ namespace dot{
             dot::ImguiLayer*                m_ImGuiLayer;
             bool                            m_Running;
             LayerStack                      m_LayersStack;
-            PerspectiveCamera*             m_Camera;
-
-            OpenGLShader*                   m_CubeShader;
-            VertexBuffer*                   m_VOCube;
-            VertexArray*                    m_VAOCube;
-            IndexBuffer*                    m_IOCube;
+            float                           m_LastFrameTime;
+            
     };
 }

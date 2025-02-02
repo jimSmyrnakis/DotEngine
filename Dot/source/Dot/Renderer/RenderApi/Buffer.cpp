@@ -23,12 +23,12 @@ uint32_t dot::SizeOfShaderDataType(ShaderDataType type){
 
 
 
-dot::BufferElement::BufferElement(const std::string& name , ShaderDataType type , bool Norm)
+dot::VertexElement::VertexElement(const std::string& name , ShaderDataType type , bool Norm)
     :   Name(name) , Type(type) , Size(0) , Offs(0) , Normallized(Norm) {
     Size = SizeOfShaderDataType(Type);
 
 }
-uint32_t dot::BufferElement::GetComponentCount(void) const{
+uint32_t dot::VertexElement::GetComponentCount(void) const{
 
     switch(Type){
         case ShaderDataType::Float  : return 1  ;
@@ -52,16 +52,20 @@ uint32_t dot::BufferElement::GetComponentCount(void) const{
 
 
 
-dot::BufferLayout::BufferLayout(const std::initializer_list<BufferElement>& elements) : m_Elements(elements) {
+dot::VertexLayout::VertexLayout(const std::initializer_list<VertexElement>& elements) : m_Elements(elements) {
     CalculateOffsetsAndStride();
 }
 
-const std::vector<dot::BufferElement>& dot::BufferLayout::GetElements(void) const { return m_Elements; }
+dot::VertexLayout::VertexLayout(void){
+    
+}
 
-void dot::BufferLayout::CalculateOffsetsAndStride(void){
+const std::vector<dot::VertexElement>& dot::VertexLayout::GetElements(void) const { return m_Elements; }
+
+void dot::VertexLayout::CalculateOffsetsAndStride(void){
     DOT_ENGINE_ASSERT(m_Elements.size() , "BufferLayout has not initiallized with Buffer Elements!");
     uint32_t Offset = 0;
-    for (BufferElement& element : m_Elements){
+    for (VertexElement& element : m_Elements){
         element.Offs = Offset;
         Offset += element.Size;
     }
@@ -69,8 +73,8 @@ void dot::BufferLayout::CalculateOffsetsAndStride(void){
 
 }
 
-std::vector<dot::BufferElement>::iterator dot::BufferLayout::begin(void) { return m_Elements.begin(); }
-std::vector<dot::BufferElement>::iterator dot::BufferLayout::end(void)   { return m_Elements.end();}
+std::vector<dot::VertexElement>::iterator dot::VertexLayout::begin(void) { return m_Elements.begin(); }
+std::vector<dot::VertexElement>::iterator dot::VertexLayout::end(void)   { return m_Elements.end();}
 
 
 

@@ -14,11 +14,11 @@ namespace dot{
             NONE , ORTHOGRAPHIC , PERSPECTIVE 
         };
         public:
-            virtual CameraType GetType(void) 			const;
+            virtual CameraType GetType(void) 			    const;
             virtual glm::mat4 GetProjectionMatrix(void) 	const = 0;
-            virtual glm::mat4 GetViewMatrix(void) 		const = 0;
-            virtual glm::mat4 GetProjectionViewMatrix(void) 	const = 0;
-            virtual glm::mat4 GetViewProjectionMatrix(void)     const = 0;
+            virtual glm::mat4 GetViewMatrix(void) 		    const = 0;
+            virtual glm::mat4 GetProjectionViewMatrix(void) const = 0;
+            virtual glm::mat4 GetViewProjectionMatrix(void) const = 0;
 
     };
 
@@ -32,6 +32,14 @@ namespace dot{
             virtual glm::mat4 GetViewMatrix(void)              const override;
             virtual glm::mat4 GetProjectionViewMatrix(void)    const override;
             virtual glm::mat4 GetViewProjectionMatrix(void)    const override;
+
+           /* void SetPosition(const glm::vec3& position) ;
+            void SetRotation(float ThetaX , float ThetaY);
+            void SetFov(float fov);
+            void SetPlanes(float zNear , float zFar);
+            void SetAspectRatio(float ratio);
+            void SetAspectRatio(unsigned int width , unsigned int height);
+            //void Set(const glm::vec3& position , )*/
         public:
             glm::vec3 m_Position	;
             glm::vec2 m_Rotation	; // (ThetaX , ThetaY )
@@ -39,7 +47,9 @@ namespace dot{
             float     m_Znear   	; // from what depth i start see the 3D word
             float     m_Zfar    	; // from what depth i stop see the 3D word
             float     m_AspectRatio	; // NDC space represented as a cube , so i need to retain a cube like form
-
+            glm::mat4 m_View        ; // The camera view matrix 
+            glm::mat4 m_Projection  ; // The Projection Matrix
+            glm::mat4 m_ProjView    ; // View
     };
 
     struct OrthographicCamera : public Camera {

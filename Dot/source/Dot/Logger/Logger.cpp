@@ -1,3 +1,4 @@
+#include "dotpch.h"
 
 #include "Logger.hpp"
 

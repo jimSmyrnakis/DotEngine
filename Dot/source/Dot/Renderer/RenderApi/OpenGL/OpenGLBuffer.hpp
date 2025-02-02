@@ -15,13 +15,13 @@ namespace dot{
             virtual void Bind(void) const override;
             virtual void Unbind(void) const override;
 
-            virtual BufferLayout& GetLayout(void) override;
-            virtual const BufferLayout& GetLayout(void) const override;
-            virtual void SetLayout(const BufferLayout layout) override;
+            virtual VertexLayout& GetLayout(void) override;
+            virtual const VertexLayout& GetLayout(void) const override;
+            virtual void SetLayout(const VertexLayout layout) override;
 
         private:
             uint32_t     m_ObjectId;
-            BufferLayout m_Layout;
+            VertexLayout m_Layout;
             
     };
 
