@@ -29,7 +29,8 @@ void dot::OpenGLContext::SwapBuffers(void) {
 
 void InitForGLFW(GLFWwindow* Glfw_WindowPointer){
     glfwMakeContextCurrent(Glfw_WindowPointer);
-    int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+    int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress); // here glfw gives to glad the functions glx/glw/gleGetProcAddress("function Name") so glad can load 
+    // all the function's required for this process
     DOT_ENGINE_ASSERT(status , "Failed to initiallize Glad!");
     //glGetString()
     DOT_ENGINE_INFO("Vendor   ( {0} ) " , (char*)glGetString(GL_VENDOR  ));

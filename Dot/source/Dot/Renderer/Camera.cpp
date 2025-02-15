@@ -16,19 +16,26 @@ namespace dot{
     }
     
     glm::mat4 PerspectiveCamera::GetViewMatrix(void)              const{
-        glm::mat4 rotationX = glm::rotate(glm::mat4(1.0f), glm::radians(m_Rotation.x), glm::vec3(1.0f, 0.0f, 0.0f));
-        glm::mat4 rotationY = glm::rotate(glm::mat4(1.0f), glm::radians(m_Rotation.y), glm::vec3(0.0f, 1.0f, 0.0f));
-        glm::mat4 translation = glm::translate(glm::mat4(1.0f), m_Position);
+        glm::mat4 rotationX = glm::rotate(glm::mat4(1.0f), - glm::radians(m_Rotation.x), glm::vec3(1.0f, 0.0f, 0.0f));
+        glm::mat4 rotationY = glm::rotate(glm::mat4(1.0f), - glm::radians(m_Rotation.y), glm::vec3(0.0f, 1.0f, 0.0f));
+        glm::vec3 pos = m_Position;
+        pos.z *= (-1);
+        pos.x *= (-1);
+        pos.y *= (-1);
+        glm::mat4 translation = glm::translate(glm::mat4(1.0f), pos);
         //return glm::mat4(1.0f);
-        return  glm::inverse(translation * rotationY * rotationX ) ;
+        return    rotationX * rotationY * translation;
     }
     
     glm::mat4 PerspectiveCamera::GetProjectionViewMatrix(void)    const{
         return GetProjectionMatrix() * GetViewMatrix();
     }
+
     glm::mat4 PerspectiveCamera::GetViewProjectionMatrix(void)    const {
         return GetViewMatrix()* GetProjectionMatrix();
     }
+
+    
     
 
     // Orthographic Camera

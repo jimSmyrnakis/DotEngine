@@ -10,6 +10,15 @@ namespace dot{
     class DOT_API UbunduWindow : public dot::Window{
 
         public:
+            struct WindowData
+            {
+                std::string Title ;
+                uint32_t    Width ;
+                uint32_t    Height;
+                bool        VSync ;
+                EventCallBackFn EventCallBack;
+            };
+        public:
             UbunduWindow(const WindowProps& props);
             ~UbunduWindow(void);
 
@@ -29,14 +38,7 @@ namespace dot{
         private:
             void* m_Window;
 
-            struct WindowData
-            {
-                std::string Title ;
-                uint32_t    Width ;
-                uint32_t    Height;
-                bool        VSync ;
-                EventCallBackFn EventCallBack;
-            };
+            
 
             WindowData     m_Data;
             OpenGLContext* m_Context;
@@ -44,7 +46,7 @@ namespace dot{
         private:
             static bool s_GLFWInitiallized;
             // create glfw specific callbacks functions and pass the events
-            static void for_glfw_resize_event        (void* window , int width , int height );
+            //static void for_glfw_resize_event        (void* window , int width , int height );
             static void for_glfw_close_event         (void* window);
             static void for_glfw_key_events          (void* window , int key , int scancode , int action , int mode);
             static void for_glfw_key_typed_event     (void* window , unsigned int character);

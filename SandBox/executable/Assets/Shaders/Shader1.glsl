@@ -6,13 +6,14 @@
 layout(location = 0) in vec3 a_Vertex;
 layout(location = 1) in vec2 a_TextCoord; 
 out vec2 v_TextCoord;
-uniform mat4 u_pv;
+uniform mat4 u_projection;
+uniform mat4 u_view;
 uniform mat4 u_model;
 
 void main(){
     
     v_TextCoord = a_TextCoord; 
-    gl_Position = u_pv*u_model*vec4(a_Vertex , 1.0);
+    gl_Position = u_projection*u_view*u_model*vec4(a_Vertex , 1.0);
 }
 
 

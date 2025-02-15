@@ -6,6 +6,17 @@
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
 
+
+void for_glfw_resize_event(void* window , int width , int height ){
+        //get User Specific data pointers (we send that pointer , we know wtf is that)
+        dot::UbunduWindow::WindowData& ourData = *(dot::UbunduWindow::WindowData*)glfwGetWindowUserPointer((GLFWwindow*)window);
+        ourData.Width = width;
+        ourData.Height = height;
+        dot::WindowResizeEvent event(width , height);
+        ourData.EventCallBack(event);
+}
+
+
 namespace dot {
 
     bool UbunduWindow::s_GLFWInitiallized = false;
@@ -80,7 +91,7 @@ namespace dot {
         glfwDestroyWindow((GLFWwindow*)m_Window);
     }
 
-    // create glfw specific callbacks functions and pass the events
+   /* // create glfw specific callbacks functions and pass the events
     void UbunduWindow::for_glfw_resize_event(void* window , int width , int height ){
         //get User Specific data pointers (we send that pointer , we know wtf is that)
         dot::UbunduWindow::WindowData& ourData = *(dot::UbunduWindow::WindowData*)glfwGetWindowUserPointer((GLFWwindow*)window);
@@ -89,7 +100,7 @@ namespace dot {
         dot::WindowResizeEvent event(width , height);
         ourData.EventCallBack(event);
     }
-
+*/
     void UbunduWindow::for_glfw_close_event(void* window){
         dot::UbunduWindow::WindowData* ourData = (dot::UbunduWindow::WindowData*)glfwGetWindowUserPointer((GLFWwindow*)window);
         dot::WindowCloseEvent event;
