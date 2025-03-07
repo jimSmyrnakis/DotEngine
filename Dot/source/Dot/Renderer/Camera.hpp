@@ -11,7 +11,7 @@ namespace dot{
 
     struct Camera {
         enum class CameraType{
-            NONE , ORTHOGRAPHIC , PERSPECTIVE 
+            NONE , ORTHOGRAPHIC , PERSPECTIVE , FIRST_PERSON
         };
         public:
             virtual CameraType GetType(void) 			    const;
@@ -73,5 +73,57 @@ namespace dot{
             float     m_Zfar    ;
             
             
+    };
+
+    class FirstPersonCamera : public Camera{
+        public:
+            FirstPersonCamera(
+                const glm::vec3& up = glm::vec3(0.0f,1.0f,0.0f)     , 
+                const glm::vec3& eye = glm::vec3(0.0f,0.0f,0.0f)    , 
+                const glm::vec3& targetPosition = glm::vec3(0.0f, 0.0f, -1.0f));
+            ~FirstPersonCamera(void);
+
+            virtual CameraType  GetType(void) 			        const override;
+            virtual glm::mat4   GetProjectionMatrix(void) 	    const override;
+            virtual glm::mat4   GetViewMatrix(void) 		    const override;
+            virtual glm::mat4   GetProjectionViewMatrix(void)   const override;
+            virtual glm::mat4   GetViewProjectionMatrix(void)   const override;
+
+            void SetProjection(float znear , float zfar , float aspectRatio , float fovDegrees );
+            void SetPosition(const glm::vec3& eyePosition);
+
+            float GetZFar(void) const;
+            float GetZNear(void) const;
+            float GetAspectRation(void) const;
+            float GetFov(void) const; 
+
+            void MoveFront(float step);
+            void MoveBack (float step);
+            void MoveUp   (float step);
+            void MoveDown (float step);
+            void MoveLeft (float step);
+            void MoveRight(float step);
+
+            void RotateRight(float stepDegrees);
+            void RotateLeft (float stepDegrees);
+            void RotateUp   (float stepDegrees);
+            void RotateDown (float stepDegrees);
+
+            void  CaculateViewMatrix(void) const ;
+            void CaculateProjMatrix(void);
+
+            //void SetZoomLevel(float zoomLevel); TODO in the future
+        private:
+            glm::vec3           m_Position;         // the position of the camera
+            glm::vec3           m_Up;               // the up direction or axis ? 
+            glm::vec3           m_View;             // view direction 
+            mutable glm::mat4   m_ViewMatrix;       // the camera matrix 
+            mutable glm::mat4   m_ProjectionMatrix; // the projection matrix
+            float               m_Fov;              // fov of the furstom
+            float               m_Aspect;           // Aspect Ratio
+            float               m_Near;             // near plane
+            float               m_Far;              // far  plane
+            mutable bool        m_Update;           // is used to update the matrixe's as needed and when needed to avoid overdoing
+            // the same caculation's over and over again
     };
 }

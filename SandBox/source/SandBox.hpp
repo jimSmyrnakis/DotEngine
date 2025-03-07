@@ -15,7 +15,8 @@ class ExambleLayer : public dot::Layer {
 
     private:
         bool m_IsResized = false;
-        dot::PerspectiveCamera*              m_Camera;
+        dot::FirstPersonCamera*              m_Camera;
+        
 
         dot::Shader*                         m_CubeShader;
         dot::VertexBuffer*                   m_VOCube;
@@ -23,6 +24,13 @@ class ExambleLayer : public dot::Layer {
         dot::IndexBuffer*                    m_IOCube;
         dot::Model3D*                        m_CubeModel;
         dot::Texture2D*                      m_CubeTexture;
+
+        dot::Shader*                         m_FloorShader;
+        dot::VertexBuffer*                   m_VOFloor;
+        dot::VertexArray*                    m_VAOFloor;
+        dot::IndexBuffer*                    m_IOFloor;
+        dot::Model3D*                        m_FloorModel;
+        dot::Texture2D*                      m_FloorTexture;
 };
 
 class SandBox : public dot::Application {

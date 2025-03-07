@@ -1,3 +1,3 @@
 #!/bin/bash
 
-./build.sh --do=Rebuild --execute
+./build.sh --do=build --execute
